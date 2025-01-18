@@ -65,7 +65,7 @@ const Checkout = (props) => {
                     keyboardType={"numeric"}
                     onChangeText={(text) => setPhone(text)}
                 />
-                <Input
+                 <Input
                     placeholder={"Shipping Address 1"}
                     name={"ShippingAddress1"}
                     value={address}
@@ -101,7 +101,7 @@ const Checkout = (props) => {
                     placeholderStyle={{ color: '#007aff' }}
                     placeholderIconColor="#007aff"
 
-                />
+                /> 
                 {/* <Select
                     width="80%"
                     iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
