@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import { Image, View, StyleSheet, Text, ScrollView, Button } from "react-native";
 import { Surface, } from "react-native-paper";
 
-const SingleProduct = (props) => {
-    const [item, setItem] = useState(props.route.params.item);
+const SingleProduct = ({route}) => {
+    
+    const [item, setItem] = useState(route.params.item);
     const [availability, setAvailability] = useState('')
 
     return (
@@ -24,12 +25,7 @@ const SingleProduct = (props) => {
                     <Text style={styles.contentText}>{item.brand}</Text>
                 </View>
                 <View style={styles.availabilityContainer}>
-                    {/* <View style={styles.availability}>
-                        <Text style={{ marginRight: 10 }}>
-                            Availability: {availabilityText}
-                        </Text>
-                        {availability}
-                    </View> */}
+                    
                     <Text>{item.description}</Text>
                 </View>
             </ScrollView>

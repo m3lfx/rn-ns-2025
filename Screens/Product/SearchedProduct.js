@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions,  } from 'react-native'
+import { View, StyleSheet, Dimensions, } from 'react-native'
 
 import { FlatList, TouchableOpacity } from 'react-native';
 import { Surface, Text, Avatar, Divider } from 'react-native-paper';
@@ -19,7 +19,8 @@ const SearchedProduct = ({ productsFiltered }) => {
                             <TouchableOpacity
                                 style={{ width: '50%' }}
                                 onPress={() => navigation.navigate("Product Detail", { item: item })
-                                }>
+                                }
+                            >
                                 <Surface width="90%">
                                     <Avatar.Image size={24}
                                         source={{
@@ -35,7 +36,7 @@ const SearchedProduct = ({ productsFiltered }) => {
                                 </Surface>
 
                             </TouchableOpacity>}
-                          
+
                         keyExtractor={item => item._id} />
                 </Surface >
             ) : (
