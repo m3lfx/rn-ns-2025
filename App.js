@@ -7,14 +7,17 @@ import Main from './Navigators/Main';
 import { Provider } from "react-redux";
 import Toast from "react-native-toast-message"
 import store from './Redux/store';
+import { Provider as PaperProvider } from 'react-native-paper';
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Header />
-        {/* <ProductContainer /> */}
-        <Main />
-        <Toast />
+        <PaperProvider>
+          <Header />
+          {/* <ProductContainer /> */}
+          <Main />
+          <Toast />
+        </PaperProvider>
       </NavigationContainer>
     </Provider>
 
