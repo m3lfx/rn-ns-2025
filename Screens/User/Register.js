@@ -7,11 +7,11 @@ import FormContainer from "../../Screens/Shared/FormContainer";
 import Input from "../../Screens/Shared/Input";
 // import Error from "../Shared/Error"
 import axios from "axios";
-// import baseURL from "../../assets/common/baseurl";
+import baseURL from "../../assets/common/baseurl";
 import Toast from "react-native-toast-message";
 import { Camera, CameraType } from 'expo-camera';
 import Icon from "react-native-vector-icons/FontAwesome"
-// import mime from "mime";
+import mime from "mime";
 
 import * as ImagePicker from "expo-image-picker"
 import * as Location from 'expo-location';
@@ -197,7 +197,7 @@ const Register = (props) => {
                 <View>
                     <Button
                         title="Register"
-                        // onPress={() => register()}
+                        onPress={() => register()}
                         style={{ color: "blue" }}
                     />
                 </View>
