@@ -6,6 +6,7 @@ import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
 import UserNavigator from "./UserNavigator";
 import AdminNavigator from "./AdminNavigator";
+import CartIcon from "../Screens/Shared/CartIcon";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,22 +14,22 @@ const Main = () => {
     return (
         <Tab.Navigator
             initialRouteName="Main"
-            screenOptions={ {
+            screenOptions={{
                 tabBarHideOnKeyboard: true,
                 tabBarShowLabel: false,
                 tabBarActiveTintColor: '#e91e63'
             }}
-          
-           
+
+
         >
             <Tab.Screen
                 name="Main"
                 component={HomeNavigator}
                 options={{
-                    tabBarIcon: ({color}) => {
+                    tabBarIcon: ({ color }) => {
                         return <Icon
                             name="home"
-                            style={{position: "relative"}}
+                            style={{ position: "relative" }}
                             color={color}
                             size={30}
 
@@ -41,14 +42,18 @@ const Main = () => {
                 name="Cart"
                 component={CartNavigator}
                 options={{
-                    tabBarIcon: ({color}) => {
-                        return <Icon
-                            name="shopping-cart"
-                            style={{position: "relative"}}
-                            color={color}
-                            size={30}
+                    tabBarIcon: ({ color }) => {
+                        return <>
+                            <Icon
+                                name="shopping-cart"
+                                style={{ position: "relative" }}
+                                color={color}
+                                size={30}
 
-                        />
+                            />
+                            <CartIcon />
+                        </>
+
                     }
                 }}
             />
@@ -57,10 +62,10 @@ const Main = () => {
                 name="Admin"
                 component={AdminNavigator}
                 options={{
-                    tabBarIcon: ({color}) => {
+                    tabBarIcon: ({ color }) => {
                         return <Icon
                             name="cog"
-                            style={{position: "relative"}}
+                            style={{ position: "relative" }}
                             color={color}
                             size={30}
 
@@ -72,10 +77,10 @@ const Main = () => {
                 name="User"
                 component={UserNavigator}
                 options={{
-                    tabBarIcon: ({color}) => {
+                    tabBarIcon: ({ color }) => {
                         return <Icon
                             name="user"
-                            style={{position: "relative"}}
+                            style={{ position: "relative" }}
                             color={color}
                             size={30}
 
