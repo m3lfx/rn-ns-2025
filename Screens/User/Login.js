@@ -2,7 +2,7 @@ import Input from "../Shared/Input";
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-// import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import FormContainer from "../Shared/FormContainer";
 
 // import AuthGlobal from '../../Context/Store/AuthGlobal'

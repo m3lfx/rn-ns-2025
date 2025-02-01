@@ -8,18 +8,22 @@ import { Provider } from "react-redux";
 import Toast from "react-native-toast-message"
 import store from './Redux/store';
 import { Provider as PaperProvider } from 'react-native-paper';
+import Auth from './Context/Store/Auth';
 export default function App() {
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <PaperProvider>
-          <Header />
-          {/* <ProductContainer /> */}
-          <Main />
-          <Toast />
-        </PaperProvider>
-      </NavigationContainer>
-    </Provider>
+    <Auth>
+      <Provider store={store}>
+        <NavigationContainer>
+          <PaperProvider>
+            <Header />
+            {/* <ProductContainer /> */}
+            <Main />
+            <Toast />
+          </PaperProvider>
+        </NavigationContainer>
+      </Provider>
+    </Auth>
+
 
 
 
