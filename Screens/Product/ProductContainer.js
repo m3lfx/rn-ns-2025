@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  useCallback } from "react";
 import { View, ScrollView, FlatList, StyleSheet, ActivityIndicator, Dimensions } from 'react-native'
 import { Surface, Text, TextInput, Searchbar } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons";
 import ProductList from './ProductList'
 import Banner from "../Shared/Banner";
 import SearchedProduct from "./SearchedProduct";
 import CategoryFilter from "./CategoryFilter";
+import baseURL from "../../assets/common/baseurl"
 
-const data = require('../../assets/data/products.json')
-const productCategories = require('../../assets/data/categories.json')
+import axios from "axios";
+
+// const data = require('../../assets/data/products.json')
+// const productCategories = require('../../assets/data/categories.json')
 
 
 var { height, width } = Dimensions.get('window')
@@ -51,24 +55,67 @@ const ProductContainer = () => {
         }
     };
 
-    useEffect(() => {
-        setProducts(data);
-        setProductsFiltered(data);
-        setFocus(false);
-        setCategories(productCategories)
-        setActive(-1)
-        setInitialState(data);
-        setProductsCtg(data)
+    // useEffect(() => {
+    //     setProducts(data);
+    //     setProductsFiltered(data);
+    //     setFocus(false);
+    //     setCategories(productCategories)
+    //     setActive(-1)
+    //     setInitialState(data);
+    //     setProductsCtg(data)
 
-        return () => {
-            setProducts([])
-            setProductsFiltered([]);
-            setFocus();
-            setCategories([])
-            setActive()
-            setInitialState();
-        }
-    }, [])
+    //     return () => {
+    //         setProducts([])
+    //         setProductsFiltered([]);
+    //         setFocus();
+    //         setCategories([])
+    //         setActive()
+    //         setInitialState();
+    //     }
+    // }, [])
+
+    useFocusEffect((
+        useCallback(
+            () => {
+                setFocus(false);
+                setActive(-1);
+                // Products
+                axios
+                    .get(`${baseURL}products`)
+                    .then((res) => {
+                        setProducts(res.data);
+                        setProductsFiltered(res.data);
+                        setProductsCtg(res.data);
+                        setInitialState(res.data);
+                        setLoading(false)
+                    })
+                    .catch((error) => {
+                        console.log('Api call error')
+                    })
+    
+                // Categories
+                axios
+                    .get(`${baseURL}categories`)
+                    .then((res) => {
+                        
+                        setCategories(res.data)
+                    })
+                    .catch((error) => {
+                        console.log('Api categoriesv call error')
+                    })
+    
+                return () => {
+                    setProducts([]);
+                    setProductsFiltered([]);
+                    setFocus();
+                    setCategories([]);
+                    setActive();
+                    setInitialState();
+                };
+            },
+            [],
+        )
+    ))
 
     return (
         <Surface width="100%" style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

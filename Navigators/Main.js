@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 const Main = () => {
     return (
         <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName="Main"
             screenOptions={ {
                 tabBarHideOnKeyboard: true,
                 tabBarShowLabel: false,
