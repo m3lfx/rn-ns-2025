@@ -3,6 +3,8 @@ import { View, Button, StyleSheet, Pressable, FlatList, TouchableOpacity, Dimens
 import { Surface, RadioButton, Text } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
+import { Dropdown } from 'react-native-paper-dropdown';
+import { Picker } from '@react-native-picker/picker';
 
 const methods = [
   { name: 'Cash on Delivery', value: 1 },
@@ -50,7 +52,8 @@ const Payment = ({ route }) => {
 
                 color='red'
                 size="18"
-               
+                // style={{ float: 'left' }}
+                // position='trailing'
                 label={item.name}
                 status='checked'
 
@@ -62,7 +65,30 @@ const Payment = ({ route }) => {
           }
         </RadioButton.Group>
       </Surface>
-      
+
+      {selected === 3 ? (
+        <Surface>
+          <Picker
+           style={{ height: 100, width: 300 }}
+            
+            selectedValue={card}
+            placeholder="Choose Service"
+            onValueChange={(itemValue, itemIndex) =>
+              setCard(itemValue)
+            }>
+            {paymentCards.map((c, index) => {
+              return (
+                <Picker.Item
+                  key={c.name}
+                  label={c.name}
+                  value={c.name} />
+              )
+            })}
+          </Picker>
+
+        </Surface>
+      ) : null}
+
       <View style={{ marginTop: 60, alignSelf: 'center' }}>
         <Button
           title={"Confirm"}
