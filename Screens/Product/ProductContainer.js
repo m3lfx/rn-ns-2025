@@ -154,7 +154,7 @@ const ProductContainer = () => {
                                 return (
                                     <ProductList
                                         // navigation={props.navigation}
-                                        key={item._id.$oid}
+                                        key={item.id}
                                         item={item}
                                     />
                                 )

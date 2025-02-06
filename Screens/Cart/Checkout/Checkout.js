@@ -11,6 +11,9 @@ import { useNavigation } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown'
 import { Dropdown } from 'react-native-paper-dropdown';
 const countries = require("../../../assets/data/countries.json");
+import AuthGlobal from '../../../Context/Store/AuthGlobal'
+import Toast from 'react-native-toast-message'
+import { Picker } from '@react-native-picker/picker'
 
 const Checkout = (props) => {
     const [user, setUser] = useState('')
@@ -24,10 +27,21 @@ const Checkout = (props) => {
 
     const navigation = useNavigation()
     const cartItems = useSelector(state => state.cartItems)
+    const context = useContext(AuthGlobal);
 
     useEffect(() => {
         setOrderItems(cartItems)
-
+        if(context.stateUser.isAuthenticated) {
+            setUser(context.stateUser.user.userId)
+        } else {
+            navigation.navigate("User", { screen: 'Login' });
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Please Login to Checkout",
+                text2: ""
+            });
+        }
         return () => {
             setOrderItems();
         }
@@ -90,18 +104,26 @@ const Checkout = (props) => {
                     keyboardType={"numeric"}
                     onChangeText={(text) => setZip(text)}
                 />
-                <Dropdown
-                    label="countries"
-                    placeholder="Select Country"
-                    options={countries}
-                    value={country}
-                    onSelect={setCountry}
-                    width="80%"
-                    
-                    placeholderStyle={{ color: '#007aff' }}
-                    placeholderIconColor="#007aff"
+                <Picker
+                        // label="Countries"
+                        style={{ height: 100, width: 300 }}
+                        minWidth="100%"
+                        placeholder="Select your Category"
+                        selectedValue={country}
+                        onValueChange={(itemValue, itemIndex) =>
+                            setCountry(itemValue)
+                          }>
+                       
+                        {countries.map((c, index) => {
+                            return (
+                                <Picker.Item
+                                    key={c.code}
+                                    label={c.name}
+                                    value={c.code} />
+                            )
+                        })}
 
-                /> 
+                    </Picker>
                 {/* <Select
                     width="80%"
                     iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
