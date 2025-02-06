@@ -74,7 +74,7 @@ const ListItem = ({ item, index, deleteProduct }) => {
             </Modal>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate("Main", {screen:"Home", params: { screen: 'Product Detail', params: { item }}})
+                    navigation.navigate('Main', {screen: 'Product Detail', params: { item }})
                 }}
                 onLongPress={() => setModalVisible(true)}
                 style={[styles.container, {

@@ -5,7 +5,7 @@ import { Surface, RadioButton, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Dropdown } from 'react-native-paper-dropdown';
 import { Picker } from '@react-native-picker/picker';
-
+import axios from 'axios';
 const methods = [
   { name: 'Cash on Delivery', value: 1 },
   { name: 'Bank Transfer', value: 2 },
@@ -89,7 +89,7 @@ const Payment = ({ route }) => {
         </Surface>
       ) : null}
 
-      <View style={{ marginTop: 60, alignSelf: 'center' }}>
+      <View style={{ marginTop: 20, alignSelf: 'center' }}>
         <Button
           title={"Confirm"}
           onPress={() => navigation.navigate("Confirm", { order })} />

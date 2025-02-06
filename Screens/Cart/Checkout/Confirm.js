@@ -5,9 +5,11 @@ import { Surface, Avatar, Divider } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
-// import AsyncStorage from "@react-native-async-storage/async-storage"
-
-
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { clearCart } from '../../../Redux/Actions/cartActions';
+import axios from 'axios';
+import baseURL from '../../../assets/common/baseurl';
+import Toast from 'react-native-toast-message';
 var { width, height } = Dimensions.get("window");
 
 const Confirm = (props) => {
@@ -15,50 +17,49 @@ const Confirm = (props) => {
     // const confirm = props.route.params;
     const finalOrder = props.route.params;
     console.log("order", finalOrder)
-    // const dispatch = useDispatch()
-    // let navigation = useNavigation()
+    const dispatch = useDispatch()
+    let navigation = useNavigation()
 
-    // const confirmOrder = () => {
-    //     const order = finalOrder.order.order;
+    const confirmOrder = () => {
+        const order = finalOrder.order.order;
 
-    //     AsyncStorage.getItem("jwt")
-    //         .then((res) => {
-    //             setToken(res)
-    //         })
-    //         .catch((error) => console.log(error))
-    //     const config = {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     }
-    //     axios
-    //         .post(`${baseURL}orders`, order, config)
-    //         .then((res) => {
-    //             if (res.status == 200 || res.status == 201) {
-    //                 Toast.show({
-    //                     topOffset: 60,
-    //                     type: "success",
-    //                     text1: "Order Completed",
-    //                     text2: "",
-    //                 });
-    //                 // dispatch(actions.clearCart())
-    //                 // props.navigation.navigate("Cart")
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+                setToken(res)
+            })
+            .catch((error) => console.log(error))
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios
+            .post(`${baseURL}orders`, order, config)
+            .then((res) => {
+                if (res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "Order Completed",
+                        text2: "",
+                    });
+                    
 
-    //                 setTimeout(() => {
-    //                     dispatch(clearCart())
-    //                     navigation.navigate("Cart");
-    //                 }, 500);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             Toast.show({
-    //                 topOffset: 60,
-    //                 type: "error",
-    //                 text1: "Something went wrong",
-    //                 text2: "Please try again",
-    //             });
-    //         });
-    // }
+                    setTimeout(() => {
+                        dispatch(clearCart())
+                        navigation.navigate("Cart");
+                    }, 500);
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again",
+                });
+            });
+    }
 
     
     return (
@@ -105,7 +106,7 @@ const Confirm = (props) => {
                     <View style={{ alignItems: "center", margin: 20 }}>
                         <Button
                             title={"Place order"}
-                            // onPress={confirmOrder}
+                            onPress={confirmOrder}
                         />
                     </View>
                 </View>
