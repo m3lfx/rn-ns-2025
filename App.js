@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message"
 import store from './Redux/store';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Auth from './Context/Store/Auth';
+import DrawerNavigator from './Navigators/DrawerNavigator';
 export default function App() {
   return (
     <Auth>
@@ -17,7 +18,8 @@ export default function App() {
           <PaperProvider>
             <Header />
             {/* <ProductContainer /> */}
-            <Main />
+            {/* <Main /> */}
+            <DrawerNavigator />
             <Toast />
           </PaperProvider>
         </NavigationContainer>
